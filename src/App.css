@@ -1,0 +1,30 @@
+.imageBox{
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  margin: 2rem auto;
+  /* border: 1px solid black; */
+}
+
+.cardImage{
+  width: 200px;  
+  height: 300px;
+}
+
+.playBtn{
+  margin: 0px auto;
+  width: 30%;
+  padding: 8px 3px;
+}
+
+.carousle{
+  margin: 0px auto;
+  width: 60% ;
+}
+
+.owl-dots{
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
