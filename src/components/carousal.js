@@ -8,12 +8,14 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import biscuit from "../artifacts/contracts/Biscuit.sol/Biscuit.json";
 import { wait } from "@testing-library/user-event/dist/utils";
-const contract_address = "0x4F04DB93D46864EE83C71797B47cB6Cff0d61492";
+const contract_address = "0xe325a50b198809d9dD6eF09b97A025385d426478";
 
 const Carousel = () => {
   let variable = {};
   const [source, setSource] = useState(image);
   const [isLoading, setLoading] = React.useState(true);
+  const [code, setCode] = React.useState("");
+  let image_url;
 
   const game = async (e) => {
     if (typeof window.ethereum !== "undefined") {
@@ -26,35 +28,55 @@ const Carousel = () => {
         signer
       );
 
-      const tx = await contract.choose();
+      const tx = await contract.secondCode();
       tx.wait();
+      // console.log("trasnaction is");
+      // console.log(tx);
+
       const code2 = await contract.getSecondCode();
-      console.log(code2);
-      // const image_url =
-      //   "https://gateway.pinata.cloud/ipfs/Qmed8tNbk5Kf7pfRLunhDNBxuzXAarcsuCMBY5ViaYMHV9/" +
-      //   code2 +
-      //   ".png";
-      //   console.log("hi");
-      const url =
-        "https://gateway.pinata.cloud/ipfs/Qmed8tNbk5Kf7pfRLunhDNBxuzXAarcsuCMBY5ViaYMHV9/1020.png";
-      //   const url =
-      //     "https://ipfs.io/ipfs/QmcaDhHDr6g69vrHcxXedzVAdof9b8cP8STuWzSZDbXkES";
-      variable = { url };
-      e.target.src = url;
-      setSource(variable[Object.keys(variable)]);
-      const code1 = await contract.getFirstCode();
-      console.log(code1);
-      if (code1 == code2) {
-        alert("user wins !!");
+
+      // console.log(code2);
+      if (code2 < 6631) {
+        let endpoint =
+          "https://bafybeifniz2yhpir6iyavzl2ntbc3wgpwzfsmr5gsmbtvp4trd2l3g66zi.ipfs.dweb.link/jsonsA/";
+        let jsonUrl = endpoint + code2 + ".json";
+        fetch(jsonUrl)
+          .then((res) => res.json())
+          .then((data) => {
+            image_url = data["Url"];
+            console.log("data:", data["Url"]);
+            variable = { image_url };
+            e.target.src = image_url;
+            setSource(variable[Object.keys(variable)]);
+          });
       } else {
-        alert("you loose !!");
+        let endpoint =
+          "https://bafybeiepbnhno6sygrdqeiyfv5ca4gbrclmr5hzbquzl6lhck6b7pbloo4.ipfs.dweb.link/jsonsB/";
+        let jsonUrl = endpoint + code2 + ".json";
+        fetch(jsonUrl)
+          .then((res) => res.json())
+          .then((data) => {
+            image_url = data["Url"];
+            console.log("data:", data["Url"]);
+            variable = { image_url };
+            e.target.src = image_url;
+            setSource(variable[Object.keys(variable)]);
+          });
       }
+
+      // const code1 = await contract.getFirstCode();
+      // console.log(code1);
+      // if (code1 == code2) {
+      //   alert("user wins !!");
+      // } else {
+      //   alert("you loose !!");
+      // }
     }
-    setLoading(false);
-    if (source.length > 0) {
-      setLoading(true);
-      console.log(source);
-    }
+    // setLoading(false);
+    // if (source.length > 0) {
+    //   setLoading(true);
+    //   console.log(source);
+    // }
   };
 
   if (isLoading) {

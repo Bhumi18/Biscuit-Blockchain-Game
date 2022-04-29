@@ -22,19 +22,25 @@ contract Biscuit {
     }
 
     function participate() public payable {
-        require(!isActive[msg.sender], "Already Participated.");
+        //require(!isActive[msg.sender], "Already Participated.");
         require(
             msg.value == participationFee,
             "Insufficient fund to participate"
         );
+
         games[msg.sender].push(Game(this.random(), 0, false));
         isActive[msg.sender] = true;
     }
 
-    function choose() public {
-        require(isActive[msg.sender], "Not Participated Yet.");
+    function secondCode() public {
         uint256 gameCount = getLength() - 1;
         games[msg.sender][gameCount].code2 = this.random();
+    }
+
+    function choose() public returns (uint256) {
+        //require(isActive[msg.sender], "Not Participated Yet.");
+        uint256 gameCount = getLength() - 1;
+        //games[msg.sender][gameCount].code2 = this.random();
         if (
             (games[msg.sender][gameCount].code2 % 52) ==
             (games[msg.sender][gameCount].code1 % 52)
@@ -58,6 +64,7 @@ contract Biscuit {
             );
         }
         isActive[msg.sender] = false;
+        return games[msg.sender][gameCount].code2;
     }
 
     function withdraw() public returns (bool) {
