@@ -1,0 +1,84 @@
+.rescards {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin: 2rem auto;
+  /*padding-right: 50px;*/
+}
+
+@media (max-width: 1080px) {
+  .rescards {
+    height: 260px;
+    width: 170px;
+    padding-right: 50px;
+  }
+}
+
+@media (max-width: 720px) {
+  .rescards {
+    height: 200px;
+    width: 120px;
+    padding-right: 50px;
+    border-radius: 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rescards {
+    height: 130px;
+    width: 80px;
+    padding-right: 50px;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .rescards {
+    height: 115px;
+    width: 65px;
+
+    border-radius: 5px;
+  }
+}
+
+.swipe {
+  position: absolute;
+}
+
+.rescard {
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px 4px #000;
+  width: 225px;
+  height: 300px;
+}
+
+@media (max-width: 1080px) {
+  .rescard {
+    height: 260px;
+    width: 170px;
+  }
+}
+
+@media (max-width: 720px) {
+  .rescard {
+    height: 200px;
+    width: 120px;
+    border-radius: 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rescard {
+    height: 130px;
+    width: 80px;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .rescard {
+    height: 115px;
+    width: 65px;
+    border-radius: 5px;
+  }
+}
